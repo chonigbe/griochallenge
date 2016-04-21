@@ -44,7 +44,7 @@ def is_half_lat_long(latlong):
   returns true if the string has properly formatted 
   the first part of the lat long coordinates
   """
-  return re.match('\[\-?[1-9]{1,3}\.[1-9]+\,'
+  return re.match('\[ ?\-?[1-9]{1,3}\.[1-9]+\,'
                   , latlong)
 
 def is_back_half(latlong):
@@ -52,7 +52,7 @@ def is_back_half(latlong):
   returns true if the string has properly formatted 
   the second part of the lat long coordinates
   """
-  return re.match('\-?[1-9]{1,3}\.[1-9]+\]?\.'
+  return re.match(' ?\-?[1-9]{1,3}\.[1-9]+ ?\]?\.?\,?\!?\??\:?'
                   , latlong)
 
 def shorten_url(url):
