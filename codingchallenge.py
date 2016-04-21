@@ -1,8 +1,6 @@
 #!/usr/bin/python
 import re
 import sys
-import time
-import httplib
 
 import requests
 
@@ -60,6 +58,8 @@ def is_back_half(latlong):
 def shorten_url(url):
   """Takes in a url 
   returns the url without https:// or http://
+  Since we already know the url is well formed,
+  the split statement below will work.
   """
   return url.split('//', 1)[-1]
 
