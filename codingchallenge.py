@@ -38,7 +38,7 @@ def is_lat_long(latlong):
   returns true if the string has properly formatted 
   longitude and latitude coordinates
   """
-  return re.match('\[ ?\-?[1-9]{1,3}\.[1-9]+\, ?\-?[1-9]{1,3}\.[1-9]+ ?\]?\.'
+  return re.match('\[ ?\-?[1-9]{1,3}\.[1-9]+\, ?\-?[1-9]{1,3}\.[1-9]+ ?\]?\.?\,?\!?\??\:?'
                   , latlong)
 
 def is_half_lat_long(latlong):
