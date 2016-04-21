@@ -83,7 +83,6 @@ def get_address(latlong):
   r = requests.get(url, params=payload)
 
   json = r.json()
-  print json['results'][0]["formatted_address"]
   address = '{} {}, {}, {}'.format(json['results'][0]['address_components'][0]['long_name']
                             , json['results'][0]['address_components'][1]['long_name']
                             , json['results'][0]['address_components'][3]['long_name']
