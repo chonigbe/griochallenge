@@ -4,7 +4,6 @@ Grio Challenge code
 ##Usage Instructions
 In order to run codingchallenge.py without error, the user's computer needs python 2.7, and to have pip installed. The user will run
 ``` 
-
 pip install requests 
 ```
 if they do not have the python requests package. 
@@ -46,16 +45,17 @@ Methods are used throughout to make modular, easily testable code. Some of the f
 6. When counting the number of characters in a word, I chose to only count alphabetic characters.
 
 ###### Outstanding Questions, Bugs and Work
-	1. Does the actually need to go line by line or would an output file also suffice?
-	2. That the latitude and longitude inputs need better handling.
-	3. I did not anticipate dealing with punctation very well. I did not realize it was going to be a blocking point until it was too late. With more time, I would fix how the code treats punctation to handle it in a more streamlined manner.
-	4. It was unclear how to handle hyphens and apostrophes when the number of characters is odd. The code as is reverses them with the rest of the characters.
-	5. My code doesn't verify that the latitude and longitude values return a valid address. It also does not return the format given.
-	6. Characters in other alphabets might not be readable in the current implementation (ex, no crylic letters or chinese characters).
-	7. The urls could be verified to make sure they are real urls. 
-	8. It would be nice to have a more user friendly input mechanism. 
 
-##Why Python.
+1. Does the actually need to go line by line or would an output file also suffice?
+2. That the latitude and longitude inputs need better handling.
+3. I did not anticipate dealing with punctation very well. I did not realize it was going to be a blocking point until it was too late. With more time, I would fix how the code treats punctation to handle it in a more streamlined manner.
+4. It was unclear how to handle hyphens and apostrophes when the number of characters is odd. The code as is reverses them with the rest of the characters.
+5. My code doesn't verify that the latitude and longitude values return a valid address. It also does not return the format given.
+6. Characters in other alphabets might not be readable in the current implementation (ex, no crylic letters or chinese characters).
+7. The urls could be verified to make sure they are real urls. 
+8. It would be nice to have a more user friendly input mechanism. 
+
+##Why Python
 
 There are four languages I considered for the challenge. Python: fast programming time, many packages filled with functionality. Java: also great API, faster than python but more upfront coding time. PHP: built in well-formed URL functionality. Javascript: whould translate quickly and easily to a UI. 
 
