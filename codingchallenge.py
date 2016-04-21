@@ -1,21 +1,14 @@
 #!/usr/bin/python
-
-##################################################
-# Author: Celia Honigberg
-# Date: 04/20/16
-# Description: Grio Code Challenge
-##################################################
-
-# standard library imports
-# related third party imports
-# local application/library specific imports
 import re
 import sys
 import time
 import httplib
 
-from django.core.validators import URLValidator
-from django.core.exceptions import ValidationError
+import requests
+
+"""codingchallenge.py: All functional code for the Grio Coding Challenge."""
+
+__author__      = "Celia Honigberg"
 
 
 def regular_word(word,charregex,punctation):
@@ -37,16 +30,32 @@ def regular_word(word,charregex,punctation):
 def is_url(url):
   """Takes in a string
   returns true if the string is a properly formatted url
-  MORE WORK NEEDED HERE. 
   """
-  return re.match('(^http|https)://', url)
+  return re.match('(^http|https)://([a-z0-9][a-z0-9\-]*\.)+[a-z0-9][a-z0-9\-]*', url)
 
 def is_lat_long(latlong):
   """Takes in a string
   returns true if the string has properly formatted 
   longitude and latitude coordinates
   """
-  return re.match('\[ *[1-9]{2}\.[1-9]+ *\, *[1-9]{2}\.[1-9]+ *\]', latlong)
+  return re.match('\[ ?\-?[1-9]{1,3}\.[1-9]+\, ?\-?[1-9]{1,3}\.[1-9]+ ?\]?\.'
+                  , latlong)
+
+def is_half_lat_long(latlong):
+  """Takes in a string
+  returns true if the string has properly formatted 
+  the first part of the lat long coordinates
+  """
+  return re.match('\[\-?[1-9]{1,3}\.[1-9]+\,'
+                  , latlong)
+
+def is_back_half(latlong):
+  """Takes in a string
+  returns true if the string has properly formatted 
+  the second part of the lat long coordinates
+  """
+  return re.match('\-?[1-9]{1,3}\.[1-9]+\]?\.'
+                  , latlong)
 
 def shorten_url(url):
   """Takes in a url 
@@ -57,27 +66,55 @@ def shorten_url(url):
 def get_address(latlong):
   """Takes in longitude and latitude coordinates 
   returns the street address from google maps api. 
+  Handles punctuation at the end of words poorly. 
   """
-  return 'FML T_____T OTL'
+  url = 'http://maps.googleapis.com/maps/api/geocode/json'
+  l = latlong.replace(']', '')
+  l = l.replace('[', '')
+  l = l.replace(' ', '')
+  if latlong.endswith(tuple(['.',',',':','?','!'])):
+    punc = latlong[-1:]
+    l = l[:-1]
+    latlong = latlong[:-1]
+  else: 
+    punc = ''
+  mysensor = 'true'
+  payload = {'latlng':l, 'sensor':mysensor}
+  r = requests.get(url, params=payload)
+
+  json = r.json()
+  print json['results'][0]["address_components"]
+  # address = '{} {}, {}, {}'.format(json['results'][0]["street_number"], 
+  #                             # json['results'][0]['route']
+  #                           , json['results'][0]['locality']
+  #                           ,json['results'][0]['administrative_area_level_1'])
+  return '{}({}){}'.format(latlong,json['results'][0]['formatted_address'],punc)
 
 def translate_content(line):
   """Takes in a file
   and prints out each line in the file with some alterrations. 
   """
   current = ''
-  for word in line.split():
+  l = line.split()
+  # only used for avoiding extra spaces
+  length = len(l)
+  for i, word in enumerate(l):
     if (is_url(word)):
       word = shorten_url(word)
-    elif (is_lat_long(word)):
-      word = word + ' ' + get_address(word)
+    elif (is_half_lat_long(word)):
+      latlong = '{} {}'.format(word,l[i+1])
+      if (is_lat_long(latlong)):
+        word = get_address(latlong)
+    elif (is_back_half(word)):
+      word = ''
     else: 
       word = regular_word(word
     	                    , '[a-zA-Z\-]'
     	                    , tuple(['.',',',':','?','!']))
-    # if (at end of line):
-    #   current += word
-    # else: 
-    current += word + ' '
+    if (i == length or word == ""):
+      current += word
+    else: 
+      current += word + ' '
   return current
 
 def print_content(file):
@@ -89,29 +126,7 @@ def print_content(file):
     for line in f:
       print translate_content(line)
 
-
-# For(all the lines in the file) {
-# 	read one line of input file
-# 	for (all the words in the line) {
-# 		take each word, check if it is a 
-# 		1. url (verfication, ignore lat longs in a url regex: http:// or https:// + domain (white list characters?) + . + small number of address characters + and infinite number of /text/text/text) (before you start writing you have to figure out what this is going to involve)
-# 		2. lat long (do verification to make sure) regex that handles [+lat+,+long+] and then verify that it's actually a place and then print out its place then print out it. 
-# 		3. Check and see if it has an odd number of characters, if it does, reverse it. 
-# 		4. If it has an even number of characters, just print it out. 
-# 	}
-# }
-
 def main():
-  start = time.clock()
   print_content('giventest.txt')
-  # translate_content('If you want to visit Grio, you can go to \
-  #       http://grio.com or visit us at [37.78667, -122.39782]. Thank you.')
-  end = time.clock()
-  print end - start
-  # start = time.clock()
-  # translate_content('testlargestring.txt')
-  # end = time.clock()
-  # print end - start
-  # display some lines
 
 if __name__ == "__main__": main()

@@ -4,6 +4,10 @@ import unittest
 
 import codingchallenge as cc
 
+"""codingchallenge.py: All functional code for the Grio Coding Challenge."""
+
+__author__      = "Celia Honigberg"
+
 class TestStringMethods(unittest.TestCase):
 
   def test_regular_word(self):
@@ -30,9 +34,8 @@ class TestStringMethods(unittest.TestCase):
     # has a path after the .com
     self.assertTrue(cc.is_url('http://grio.com/portfolio'),1)
     # not well formed, no dot anything
-    #self.assertFalse(cc.is_url('http://grio/portfolio'),1)
-    # not a real url 
-    #self.assertFalse(cc.is_url('http://portfoliogrio.com/'),1)'
+    self.assertFalse(cc.is_url('http://grio/portfolio'),1)
+
   def test_shorten_url(self):
     # general domain http
     self.assertTrue(cc.shorten_url('http://grio.com'),'grio.com')
@@ -53,7 +56,7 @@ class TestStringMethods(unittest.TestCase):
     # general false test
     self.assertFalse(cc.is_lat_long('32987.89373'),1)
     # general true test
-    self.assertTrue(cc.is_lat_long('[ 45.4379, 32.487932 ]'),1)
+    self.assertTrue(cc.is_lat_long('[45.4379,32.487932]'),1)
     # general false test 
     self.assertFalse(cc.is_lat_long('[ 45.4379, 32. ]'),1)
     # general true test
