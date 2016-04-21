@@ -1,7 +1,5 @@
 #!/usr/bin/python
 import re
-import sys
-
 import requests
 
 """codingchallenge.py: All functional code for the Grio Coding Challenge."""
