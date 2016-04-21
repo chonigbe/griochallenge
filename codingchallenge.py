@@ -66,7 +66,7 @@ def shorten_url(url):
 def get_address(latlong):
   """Takes in longitude and latitude coordinates 
   returns the street address from google maps api. 
-  Handles punctuation at the end of words poorly. 
+  Handles punctuation at the end of words appropriately. 
   """
   url = 'http://maps.googleapis.com/maps/api/geocode/json'
   l = latlong.replace(']', '')
@@ -92,7 +92,7 @@ def get_address(latlong):
 
 def translate_content(line):
   """Takes in a file
-  and prints out each line in the file with some alterrations. 
+  and prints out each line in the file with the given alterrations. 
   """
   current = ''
   l = line.split()
