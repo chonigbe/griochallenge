@@ -62,14 +62,5 @@ class TestStringMethods(unittest.TestCase):
     # general true test
     self.assertTrue(cc.is_lat_long('[ 45.4, 32.4 ]'),1)
 
-
-  def test_translate_content(self):
-    self.assertTrue(cc.translate_content('If you want to visit Grio, you can go to \
-      http://grio.com or visit us at [37.78667, -122.39782]. Thank you.'),
-      'If uoy want to tisiv Grio, uoy nac go to moc.oirg//:ptth or tisiv \
-      us at [37.78667, -122.39782]. knahT uoy. ')
-    self.assertFalse('Foo'.isupper())
-
-
 if __name__ == '__main__':
   unittest.main()
