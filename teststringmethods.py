@@ -45,10 +45,10 @@ class TestStringMethods(unittest.TestCase):
     self.assertTrue(cc.shorten_url('http://hammerfishslap.tumblr.com'),'hammerfishslap.tumblr.com')
     # has a path after the .com
     self.assertTrue(cc.shorten_url('http://grio.com/portfolio'),'grio.com/portfolio')
-        # has a path after the .com
+    # has a path after the .com
     self.assertTrue(cc.shorten_url('http://grio.com//portfolio'),'grio.com//portfolio')
     # not well formed, no dot anything
-    #self.assertFalse(cc.is_url('http://grio/portfolio'),1)
+    self.assertFalse(cc.is_url('http://grio/portfolio'),1)
     # not a real url 
     #self.assertFalse(cc.is_url('http://portfoliogrio.com/'),1)'
 
