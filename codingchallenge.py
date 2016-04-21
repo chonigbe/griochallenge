@@ -39,20 +39,20 @@ def is_url(url):
   returns true if the string is a properly formatted url
   MORE WORK NEEDED HERE. 
   """
-  return re.match('(^http|ftp|https)://', url)
+  return re.match('(^http|https)://', url)
 
 def is_lat_long(latlong):
   """Takes in a string
   returns true if the string has properly formatted 
   longitude and latitude coordinates
   """
-  return re.match('(?:http|ftp|https)://', latlong)
+  return re.match('\[ *[1-9]{2}\.[1-9]+ *\, *[1-9]{2}\.[1-9]+ *\]', latlong)
 
 def shorten_url(url):
   """Takes in a url 
   returns the url without https:// or http://
   """
-  return 'grio.com'
+  return url.split('//', 1)[-1]
 
 def get_address(latlong):
   """Takes in longitude and latitude coordinates 
