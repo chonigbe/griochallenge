@@ -83,12 +83,12 @@ def get_address(latlong):
   r = requests.get(url, params=payload)
 
   json = r.json()
-  print json['results'][0]["address_components"]
-  # address = '{} {}, {}, {}'.format(json['results'][0]["street_number"], 
-  #                             # json['results'][0]['route']
-  #                           , json['results'][0]['locality']
-  #                           ,json['results'][0]['administrative_area_level_1'])
-  return '{}({}){}'.format(latlong,json['results'][0]['formatted_address'],punc)
+  print json['results'][0]["formatted_address"]
+  address = '{} {}, {}, {}'.format(json['results'][0]['address_components'][0]['long_name']
+                            , json['results'][0]['address_components'][1]['long_name']
+                            , json['results'][0]['address_components'][3]['long_name']
+                            , json['results'][0]['address_components'][5]['short_name'])
+  return '{}({}){}'.format(latlong,address,punc)
 
 def translate_content(line):
   """Takes in a file

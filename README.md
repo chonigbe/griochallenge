@@ -50,7 +50,7 @@ Methods are used throughout to make modular, easily testable code. Some of the f
 2. That the latitude and longitude inputs need better handling.
 3. I did not anticipate dealing with punctation very well. I did not realize it was going to be a blocking point until it was too late. With more time, I would fix how the code treats punctuation to handle it in a more streamlined manner.
 4. It was unclear how to handle hyphens and apostrophes when the number of characters is odd. The code as is reverses them with the rest of the characters.
-5. My code doesn't verify that the latitude and longitude values return a valid address. It also does not return the format given.
+5. My code doesn't verify that the latitude and longitude values return a valid address. It returns the given format, but would not return it perfectly in all cases. 
 6. Characters in other alphabets might not be readable in the current implementation (ex, no cyrillic letters or chinese characters).
 7. The urls could be verified to make sure they are real urls. 
 8. It would be nice to have a more user friendly input mechanism. 
